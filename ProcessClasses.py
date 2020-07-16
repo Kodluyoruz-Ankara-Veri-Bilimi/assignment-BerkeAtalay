@@ -39,16 +39,16 @@ class data_vis(data_inf):
         pass
 
 
-class data_preprec():
+class data_preprec(df):
     def __init__(self):
-        pass
+        self.data = df
 
     def dummie():
         pass
 
     def nn():
-        pass
-
+        
+        self.data = self.data.dropna()
     def featurescale():
         pass
 
