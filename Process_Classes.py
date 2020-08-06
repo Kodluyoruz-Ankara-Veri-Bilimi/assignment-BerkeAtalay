@@ -1,6 +1,8 @@
 
 import pandas as pd
-    
+import numpy as np   
+from IPython.display import display
+
 class information:
     
     
@@ -14,31 +16,57 @@ class information:
        
     def _load_data_info(self):
         #kendime not: file name için . dan ayır sondakini al eğer csv ise read csv değilse ne olduğuna göre güncelle
+        typ = self.file_name.split(".")[-1]
         
-        data = pd.read_csv(self.path + self.file_name)
+        if typ == "csv":
+            data = pd.read_csv(self.path + self.file_name)
+            
+        elif typ == "xlsx":
+            data = pd.read_excel(self.path + self.file_name)
+        
+        else:
+            print("This file type is not supported please use your own methods or contact me")
         
         print(self.file_name +" is loaded")
         return data
     
-    def get_inf(self,method = ""):
+    def get_inf(self,load = True, method = ""):
         
         #prints basic information about raw data and collect column names with object type if method is entered does it current only have drop which drops rows with na valuex
         
-        data = self._load_data_info()
-        
+        if load:
+            data = self._load_data_info()
+            self.data = data
+            self.catdata = data
+            
         if method == "drop":
-            data = data.dropna()
-        
-        print(data.head())
+            print(len(self.data))
+            self.data = self.data.dropna()
+            self.catdata = self.data
+            print(len(self.data))
+            
+        display(self.data.head())
         print()
-        print(data.info())
+        display(self.data.info())
         print()
-        print(data.describe().T)
+        display(self.data.describe().T)
         
-        self.data = data
-        self.catdata = data
-        self.catlist = list(data.select_dtypes(include=['object']).columns)    
+        print("Columns names with object type are saved in .catlist if you want to turn them into dummies use cattodummy")
+        self.catlist = list(self.data.select_dtypes(include=['object']).columns)
         
+    
+    def catinfo(self):
+        display(self.data[self.catlist].head())
+        
+    def dropcolumn(self, column_list = []):
+       
+        for i in column_list:
+            if i in self.catlist:
+                self.catlist.remove(i)
+            self.data = self.data.drop(i,axis = 1)
+            self.catdata = self.catdata.drop(i,axis = 1)
+            
+ 
     def cattodummy(self,column_names = []):
         
         #if user does not give spesific columns to transform it takes columns with object type
@@ -65,27 +93,22 @@ class information:
                 self.catdata = pd.concat([self.catdata, temp_df], axis=1).drop(i,axis=1)
 
             print("Dummies entered as .catdata")
-            print(self.catdata.head())
+            display(self.catdata.head())
         else:
             #error message for columns
             print("Columns do not exist in catdata you may already transfer them to dummies, please check:")
-            print(self.catdata.head())
+            display(self.catdata.head())
             
 
     def choose_your_y (self,column_name):  #returns X , y depending on your selection of column name
-        self.catdata[column_name].value_counts().plot.barh()
+         #!!!! Kendime NOT plotu optinel yap, sayısal durumlarda uzun sürüyor ve bir şeye benzemiyor
+        #self.catdata[column_name].value_counts().plot.barh()
         y = self.catdata.drop(column_name, axis=1)
-        print(y.head())
+        display(y.head())
         return self.catdata[column_name], y
  
 
-
-
     
-  
-
-
-     
 class models:
     
     def __init__(self,x,y):
@@ -97,6 +120,7 @@ class models:
         self.x = x
         
     def model_selection(self,model_type = "", slvr = "", rs = 42):
+        
         a="default"
         
         if model_type == "logres":
@@ -112,10 +136,60 @@ class models:
             else:
                 self.classifier = LogisticRegression(random_state = rs)
             print("Logistic Regression Classifier is initiliazed with  " + a + " solver.")
+        
+        elif model_type == "pca":
+            
+            from sklearn.decomposition import PCA
+            self.classifier = PCA()
+            print("PCA is initilialized without specific number of components")
+            
             
         else:
             print("Please Choose a classifier")
-            
+                
+    
+    def pca_proc(self,threshold=0.8, norm = True, split = True, rate = 0.2, rs = 42):
+        
+        
+        #!!! Kendime not bu kısımları model_fit de aynı olanları model_preporc diye yeni bir foncvtionun içine al ve onu çağır
+        
+        if norm:
+            from sklearn.preprocessing import StandardScaler
+            sc_X = StandardScaler()
+            x = pd.DataFrame(sc_X.fit_transform(self.x),index = self.x.index)
+        else:
+            x = self.x
+        
+        if split:
+            from sklearn.model_selection import train_test_split
+            X_train, X_test, y_train, y_test = train_test_split(x, self.y, test_size = rate, random_state = rs)
+            self.X_train = X_train
+            self.y_train = y_train
+            self.X_test = X_test
+            self.y_test = y_test
+        
+        else:
+            X_train = x
+            self.X_train = x
+            self.y_train = self.y
+            self.X_test = x
+            y_train = self.y
+            self.y_test  = self.y
+        
+        
+        
+        
+        X_pca = self.classifier.fit_transform(self.X_train)
+        arr = np.cumsum(np.round(self.classifier.explained_variance_ratio_, decimals = 4)*100)
+        num_var = sum((arr < threshold*100)) + 1 
+        print('Pca sonrası değişken sayısı: ',num_var)
+        X_pcad = pd.DataFrame(X_pca[:,0:num_var], index = self.X_train.index)
+        self.X_train_pcad = X_pcad
+        print("New X_train values are saved as X_train_pcad")
+        
+        
+        
+
     def model_fit(self,norm = False, split = False, rate = 0.2, rs = 42):
         
         if norm:
@@ -132,6 +206,7 @@ class models:
             self.y_train = y_train
             self.X_test = X_test
             self.y_test = y_test
+        
         else:
             X_train = x
             self.X_train = x
@@ -167,6 +242,7 @@ class models:
         from sklearn.metrics import confusion_matrix, accuracy_score
         print(accuracy_score(y_test_pred,self.y_test))
         print(confusion_matrix(self.y_test, y_test_pred))
+        
 
     def predict_prob(self,pc = 0):
         
