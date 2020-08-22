@@ -26,3 +26,4 @@
 
 
 ### Diğer
+- [] eski class içindeki pca yi düzelt
