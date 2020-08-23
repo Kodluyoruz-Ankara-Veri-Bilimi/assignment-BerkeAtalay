@@ -6,8 +6,8 @@
 ### Classification
 - [x] KNN
 - [x] def için f1 tablosu
-- [ ] grid f1lerini def f1leri ile karşılaştıran tablo
-- [ ] pca
+- [x] grid f1lerini def f1leri ile karşılaştıran tablo
+- [x] pca
 - [ ] grid için optionel scoring parametresi
 - [ ] split için shuffle parametresi
 
@@ -15,7 +15,7 @@
 - [x] pca
 - [ ] pca-split bağlantısı
 - [x] pca için thrashold, kullanımayacak kolon, scale parametreleri
-- [ ] KNN
+- [x] KNN
 - [ ] Def ve grid sonuçları için tablolar
 
 
@@ -27,3 +27,4 @@
 
 ### Diğer
 - [x] eski class içindeki pca yi düzelt
+
