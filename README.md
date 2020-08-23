@@ -1,6 +1,19 @@
 # Berke Atalay Ödevler
-
- 
+## Ödev Açıklamaları
+- HW1 - HMELQ datasının analiz edilmesi
+- HW2 - Forex datasında regression yapılması
+- HW3 - HMELQ datasında Logistic Regression yapılması
+- HW3 - Forex datasında PCA yapılması ve daha sonra onunla linreg yapılması
+- HW4 - Classification ve Regressionların classları kullanmadan birbiriyle karşılaştırılması
+  - DecisionTree, RandomForest, MLP
+- HW5 - Forex datasının etiketlenip naive bayes uygulanması
+- Hw6 - Forex datasında cluster uygulanması
+- Hw_Classification: Bütün classificationların karşılaştırıldığı ve class içinde kullanılan ödev
+- Hw_Regression: Bütün regressionların grid olmayan hallerinin karşılaştırıldığı ve class içerisinde olan ödev
+- Process_Classes: Clasların bulunduğu kod
+## Uyarı
+Nedenini bilmediğim bir şekilde son iki gündür SVD did not converge hatası alıyorum. Sebebini hala bulamadım ancak tekrar aynı yerden runlarsanız sorunsuz çalışıyor
+  
 ## Yapılacaklar
 
 ### Classification
