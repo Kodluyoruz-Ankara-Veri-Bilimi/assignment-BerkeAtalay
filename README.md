@@ -9,6 +9,7 @@
 - HW5 - Forex datasının etiketlenip naive bayes uygulanması
 - Hw6 - Forex datasında cluster uygulanması
 - Hw_Classification: Bütün classificationların karşılaştırıldığı ve class içinde kullanılan ödev
+    - KNN ve boosting karşılaştırmaları da bu ve bir sonraki ödevin içerisinde
 - Hw_Regression: Bütün regressionların grid olmayan hallerinin karşılaştırıldığı ve class içerisinde olan ödev
 - Process_Classes: Clasların bulunduğu kod
 ## Uyarı
