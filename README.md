@@ -1,5 +1,4 @@
 # Berke Atalay Ödevler
-Doğrudan HW4_classificationdaki resultlar sekmesini runlayamadım ancak hepsi ve daha fazlası hw_classification içerisnde yer alıyor
 
 ## Ödev Açıklamaları
 - HW1 - HMELQ datasının analiz edilmesi
