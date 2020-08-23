@@ -1,6 +1,6 @@
 # Berke Atalay Ödevler
 ## Uyarı
-Nedenini bilmediğim bir şekilde son iki gündür SVD did not converge hatası alıyorum. Sebebini hala bulamadım ancak tekrar aynı yerden runlarsanız sorunsuz çalışıyor
+Nedenini bilmediğim bir şekilde son iki gündür daha önceden almadığım SVD did not converge hatası alıyorum. Sebebini hala bulamadım ancak tekrar aynı yerden runlarsanız sorunsuz çalışıyor
 
 ## Ödev Açıklamaları
 - HW1 - HMELQ datasının analiz edilmesi
