@@ -1,4 +1,6 @@
 # Berke Atalay Ödevler
+## Uyarı
+Nedenini bilmediğim bir şekilde son iki gündür SVD did not converge hatası alıyorum. Sebebini hala bulamadım ancak tekrar aynı yerden runlarsanız sorunsuz çalışıyor
 
 ## Ödev Açıklamaları
 - HW1 - HMELQ datasının analiz edilmesi
@@ -13,8 +15,6 @@
     - KNN ve boosting karşılaştırmaları da bu ve bir sonraki ödevin içerisinde
 - Hw_Regression: Bütün regressionların grid olmayan hallerinin karşılaştırıldığı ve class içerisinde olan ödev
 - Process_Classes: Clasların bulunduğu kod
-## Uyarı
-Nedenini bilmediğim bir şekilde son iki gündür SVD did not converge hatası alıyorum. Sebebini hala bulamadım ancak tekrar aynı yerden runlarsanız sorunsuz çalışıyor
   
 ## Yapılacaklar
 
